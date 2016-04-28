@@ -39,4 +39,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  
+  # Configuration for actionmailer and confirmation emails
+  config.action_mailer.default_url_options = { host: 'the-sports-review-amahadeo.c9users.io' }
+  config.action_mailer.delivery_method = :test
+  config.action_mailer.perform_deliveries = true
 end

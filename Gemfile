@@ -1,10 +1,22 @@
 source 'https://rubygems.org'
 
-
+# Use Figaro for storing environment variables
+gem 'figaro', '1.0'
+# Use Devise for user authentication
+gem 'devise'
+# Use Bootstrap for styling
+gem 'bootstrap-sass'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use PostgreSQL as the database for Active Record in production
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
+# Use sqlite3 as the database for Active Record in development
+group :development do
+  gem 'sqlite3'
+end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -35,6 +47,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  
+  # Use RSpec framework for test
+  gem 'rspec-rails', '~> 3.0'
+  
+  # Use Capybara for feature tests
+  gem 'capybara'
+  
+  # Use FactoryGirl for test factories
+  gem 'factory_girl_rails', '~> 4.0'
 end
 
 group :development do
