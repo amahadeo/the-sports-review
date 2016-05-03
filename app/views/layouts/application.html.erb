@@ -20,7 +20,12 @@
       
       <ul class="nav navbar-nav">
         <li>
-          <%= link_to "Articles", '#' %>
+          <%= link_to "Articles", articles_path %>
+        </li>
+        <li>
+          <%= link_to new_article_path do %>
+            <span class="glyphicon glyphicon-pencil"> </span> Contribute
+          <% end %>
         </li>
       </ul>
             
