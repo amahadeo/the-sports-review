@@ -5,6 +5,8 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @comments = @article.comments
+    #@new_comment = @article.comments.new
   end
 
   def new
@@ -43,12 +45,12 @@ class ArticlesController < ApplicationController
     if @article.destroy
       redirect_to articles_path, notice: "Article deleted."
     else
-      render :back
       flash[:error] = "Sorry, there was an error deleting that article."
+      render :back    
     end
   end 
   
-  protected
+  private
   
   def article_params
     params.require(:article).permit(:title, :body)
