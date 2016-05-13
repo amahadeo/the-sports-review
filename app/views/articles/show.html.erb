@@ -7,10 +7,22 @@
   <%= link_to "Delete", @article, method: :delete, data: { confirm: "Are you sure you want to delete this article?" }, class: "btn btn-danger" %>
 </div>
 
-<%= render @comments %>
+<div class="row">
+  <div class="col-sm-6">
+    <%= render @comments %>
+  </div>
+  <div class="col-sm-6">
+    <% if current_user %>
+      <%= render partial: 'comments/form', locals: { article: @article, comment: @article.comments.new } %>
+    <% else %>
+      <p class="well well-sm"> Please <%= link_to "log in", new_user_session_path %> to start commenting!</p>
+    <% end %>
+  </div>
+</div>
 
 
-<%= render partial: 'comments/form', locals: { article: @article, comment: @article.comments.new } %>
+
+
 
 
 
