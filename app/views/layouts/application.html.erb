@@ -14,7 +14,9 @@
       
       <div class="navbar-header">
         <strong>
-          <%= link_to "The Sports Review", root_path, class: "navbar-brand" %>
+          <%= link_to root_path, class: "navbar-brand" do %>
+            The Sports Review <span class="glyphicon glyphicon-comment"> </span>
+          <% end %>
         </strong>
       </div>
       
