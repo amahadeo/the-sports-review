@@ -11,6 +11,14 @@ require 'faker'
   user.save!
 end
 
+member = User.new(
+  username:   "tsruser",
+  email:      "member@tsr.com",
+  password:   "123456789"
+  )
+member.skip_confirmation!
+member.save
+
 users = User.all
 
 # Create Articles
