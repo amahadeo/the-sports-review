@@ -18,7 +18,6 @@
 //= require masonry/jquery.infinitescroll.min
 //= require_tree .
 
-$ ->
-  $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-  });
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
