@@ -21,12 +21,32 @@
       </div>
       
       <ul class="nav navbar-nav">
-        <li>
-          <%= link_to "Articles", articles_path %>
+        <li class="dropdown">
+          <%= link_to "#", class: "dropdown-toggle", data: {toggle: "dropdown"} do %>
+            <span class="glyphicon glyphicon-list-alt"> </span> Articles <span class="caret"></span>
+          <% end %>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Top Articles", "#" %></li>
+            <li><%= link_to "Trending", "#" %></li>
+            <li><%= link_to "Newest", "#" %></li>
+            <% if current_user %>
+              <li><%= link_to "Followed Users", "#" %></li>
+            <% end %>
+          </ul>
         </li>
         <li>
           <%= link_to new_article_path do %>
             <span class="glyphicon glyphicon-pencil"> </span> Contribute
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "#" do %>
+            <span class="glyphicon glyphicon-flash"> </span> Leaderboard
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "#about", data: {toggle: "collapse"}  do %>
+            <span class="glyphicon glyphicon-question-sign"> </span> About TSR
           <% end %>
         </li>
       </ul>
@@ -78,6 +98,19 @@
         <%= flash[:alert] %>
       </div>
     <% end %>
+    <div id="about" class="collapse">
+      <div class="alert alert-info">
+      A Twitter/Quora of sorts for sports fans: It's a place where fans can come 
+      together and debate, prognosticate, speculate, release breaking news, or have 
+      educated discussions about issues and trends in sports. Its a place where fans 
+      can become the sports writers. Budding sports writers themselves can build a 
+      following here without the need for major networks or publications to provide a 
+      platform, further granting them the ability to build a resume, portfolio, and 
+      career. It's everyone's individual sports blog blended together in one convenient 
+      platform. So hit that "Contribute" button and start getting your Adam Schefter on!
+      </div>
+      <hr>
+    </div>
     
     <%= yield %>
   
