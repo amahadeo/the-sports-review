@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# Use Pundit for authorization
+gem 'pundit'
 # Use Masonry for cascade styling
 gem 'masonry-rails'
 # Use Faker for seeding data

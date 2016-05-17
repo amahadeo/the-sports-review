@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
     @article = Article.find(params[:article_id])
     @comment = current_user.comments.build(comment_params)
     @comment.article = @article
+    authorize @comment
     
     if @comment.save
       redirect_to @article, notice: "Thanks for the comment!"
@@ -14,6 +15,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @article = Article.find(params[:article_id])
+    authorize @comment
     
     if @comment.destroy
       redirect_to @article, alert: "Comment was removed."

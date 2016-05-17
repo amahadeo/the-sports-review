@@ -2,9 +2,14 @@
   <h1><%= @article.title %></h1>
   <p><%= @article.body %></p>
   <br>
-  <%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary" %>
-
-  <%= link_to "Delete", @article, method: :delete, data: { confirm: "Are you sure you want to delete this article?" }, class: "btn btn-danger" %>
+  <i class="text-muted">Posted by <%= link_to @article.user.username, "#" %> <%= time_ago_in_words(@article.created_at) %> ago</i>
+  <div class="pull-right">
+  <% if policy(@article).update? %>
+    <%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary" %>
+    <%= link_to "Delete", @article, method: :delete, data: { confirm: "Are you sure you want to delete this article?" }, class: "btn btn-danger" %>
+    <!--Grouped under one authorization check since update and delete follow same policy-->
+  <% end %>
+  </div>
 </div>
 
 <div class="row">
