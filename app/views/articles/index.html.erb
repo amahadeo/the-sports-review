@@ -5,7 +5,7 @@
         <strong><%= link_to article.title[0, rand(30..50)], article %></strong>
         <p><%= article.body[0, rand(250..500)] %></p>
         <small class="text-muted">
-          posted <%= time_ago_in_words(article.created_at) %> ago by <%= article.user.username %>
+          posted <%= time_ago_in_words(article.created_at) %> ago by <%= link_to article.user.username, "#" %>
         </small>
       </div>
     </div>

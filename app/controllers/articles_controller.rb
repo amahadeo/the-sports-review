@@ -1,21 +1,24 @@
 class ArticlesController < ApplicationController
   def index
     @articles = Article.all
+    authorize Article
   end
 
   def show
     @article = Article.find(params[:id])
     @comments = @article.comments
-    #@new_comment = @article.comments.new
+    authorize @article
   end
 
   def new
-    redirect_to new_user_session_path unless current_user
+    redirect_to new_user_session_path, alert: "Please log in first." unless current_user
     @article = Article.new
+    # authorize @article
   end
   
   def create
     @article = current_user.articles.build(article_params)
+    authorize @article
     
     if @article.save
       redirect_to @article, notice: "Thanks for contributing!"
@@ -27,10 +30,12 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+    authorize @article
   end
   
   def update
     @article = Article.find(params[:id])
+    authorize @article
     
     if @article.update_attributes(article_params)
       redirect_to @article, notice: "Update saved. Thanks for contributing!"
@@ -42,6 +47,7 @@ class ArticlesController < ApplicationController
   
   def destroy
     @article = Article.find(params[:id])
+    authorize @article
     
     if @article.destroy
       redirect_to articles_path, notice: "Article deleted."

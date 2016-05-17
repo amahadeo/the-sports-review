@@ -11,6 +11,9 @@
       </div>
       <div class="panel-body">
         <%= comment.body %>
+        <% if policy(comment).destroy? %>
+          <%= link_to "", article_comment_path(comment.article, comment), method: :delete, class: "glyphicon glyphicon-remove pull-right", data: {toggle: "tooltip"}, title: "Delete Comment" %>
+        <% end %>
       </div>
     </div>
   </div>
