@@ -33,7 +33,7 @@ end
 articles = Article.all
 
 # Create Comments
-200.times do
+800.times do
   Comment.create!(
     body:     Faker::StarWars.quote,
     user:     users.sample,
