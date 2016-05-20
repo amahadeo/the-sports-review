@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+# Use Bonsai elasticsearch for search
+gem 'elasticsearch-rails'
+gem 'elasticsearch-model'
+gem 'bonsai-elasticsearch-rails'
 # Use Pundit for authorization
 gem 'pundit'
 # Use Masonry for cascade styling
