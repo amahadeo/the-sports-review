@@ -1,3 +1,13 @@
+<div class="row search">
+  <div class="col-sm-9"></div>
+  <div class="col-sm-3">
+  <%= form_tag articles_path, method: :get do %>
+    <%= text_field_tag :search, params[:search], placeholder: "I'm eager to read about..." %>
+    <%= button_tag "Search", class: "btn btn-default", name: nil %>
+  <% end %>
+  </div>
+</div>
+
 <div id="articles" class="transitions-enabled infinite-scroll">
   <% @articles.each do |article| %>
     <div class="box panel panel-default">

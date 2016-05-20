@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+# Use Sunspot for text search
+gem 'sunspot_rails'
+gem 'sunspot_solr'
+gem 'progress_bar'
 # Use Pundit for authorization
 gem 'pundit'
 # Use Masonry for cascade styling

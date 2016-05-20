@@ -1,6 +1,12 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all
+    count = Article.count
+    @search = Article.search do
+      fulltext params[:search]
+      paginate :page => 1, :per_page => count
+    end
+    @articles = @search.results
+    # @articles = Article.all
     authorize Article
   end
 
