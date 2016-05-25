@@ -1,0 +1,2 @@
+$("#followers-count").html('<%= @user.followers.count %>');
+$("#follow-link").html("<%= escape_javascript(link_to "Follow", user_relationships_path(@user), class: "btn btn-primary btn-block", method: :post, remote: true) %>");

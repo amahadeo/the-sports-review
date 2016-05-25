@@ -1,0 +1,2 @@
+$("#followers-count").html('<%= @user.followers.count %>');
+$("#follow-link").html("<%= escape_javascript(link_to "Unfollow", user_relationships_path(@user), class: "btn btn-danger btn-block", method: :delete, remote: true) %>");

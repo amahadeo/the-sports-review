@@ -7,7 +7,17 @@ class ArticlesController < ApplicationController
     end
     authorize Article
   end
+  
+  def feed_index
+    authorize Article
+    @articles = current_user.feed
+  end
 
+  def newest_index
+    @articles = Article.order("created_at DESC")
+    authorize Article
+  end
+  
   def show
     @article = Article.find(params[:id])
     @comments = @article.comments
