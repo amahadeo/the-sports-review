@@ -3,6 +3,14 @@ class ArticlePolicy < ApplicationPolicy
     true
   end
   
+  def feed_index?
+    user.present?
+  end
+  
+  def newest_index?
+    true
+  end
+  
   def show?
     true
   end

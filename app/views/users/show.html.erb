@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-sm-2">
+    <div class="thumbnail">
+      <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <h1><%= @user.username %></h1><br>
+    <div class="row">
+      <div class="follow-stats">
+        <div class="col-sm-4 text-center border-top border-bottom">
+          <strong id="followers-count"><%= @user.followers.count %></strong>
+          <p>Followers</p>
+        </div>
+        <div class="col-sm-4 text-center border-top border-bottom">
+          <strong><%= @user.following.count %></strong>
+          <p>Following</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <br>
+    <p><span class="glyphicon glyphicon-user"> </span>&nbsp; Member since: <%= (@user.created_at).to_formatted_s(:long_ordinal) %></p>
+    <p><span class="glyphicon glyphicon-list-alt"> </span>&nbsp; <strong><%= @articles.count %></strong> articles contributed</p>
+    <p><span class="glyphicon glyphicon-comment"> </span>&nbsp; <strong><%= @comments.count %></strong> comments added</p>
+    <p><span class="glyphicon glyphicon-thumbs-up"> </span>&nbsp; <strong>0</strong> total votes</p>
+    <% unless !current_user || current_user == @user %>
+      <div id="follow-link">
+        <% if current_user.following?(@user) %>
+          <%= link_to "Unfollow", user_relationships_path(@user), class: "btn btn-danger btn-block", method: :delete, remote: true %>
+        <% else %>
+          <%= link_to "Follow", user_relationships_path(@user), class: "btn btn-primary btn-block", method: :post, remote: true %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<h2>Articles (<%= @articles.count %>)</h1>
+
+<%= render partial: 'articles/articles_list', locals: { articles: @articles } %>

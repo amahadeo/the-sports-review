@@ -1,0 +1,13 @@
+<div id="articles" class="transitions-enabled infinite-scroll">
+  <% articles.each do |article| %>
+    <div class="box panel panel-default">
+      <div class="panel-body">
+        <strong><%= link_to article.title[0, rand(30..50)], article %></strong>
+        <p><%= article.body[0, rand(250..500)] %></p>
+        <small class="text-muted">
+          posted <%= time_ago_in_words(article.created_at) %> ago by <%= link_to article.user.username, article.user %>
+        </small>
+      </div>
+    </div>
+  <% end %>
+</div>

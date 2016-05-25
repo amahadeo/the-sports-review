@@ -2,7 +2,7 @@
   <h1><%= @article.title %></h1>
   <p><%= @article.body %></p>
   <br>
-  <i class="text-muted">Posted by <%= link_to @article.user.username, "#" %> <%= time_ago_in_words(@article.created_at) %> ago</i>
+  <i class="text-muted">Posted by <%= link_to @article.user.username, @article.user %> <%= time_ago_in_words(@article.created_at) %> ago</i>
   <div class="pull-right">
   <% if policy(@article).update? %>
     <%= link_to "Edit", edit_article_path(@article), class: "btn btn-primary" %>

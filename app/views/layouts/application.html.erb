@@ -28,9 +28,9 @@
           <ul class="dropdown-menu">
             <li><%= link_to "Top Articles", "#" %></li>
             <li><%= link_to "Trending", "#" %></li>
-            <li><%= link_to "Newest", "#" %></li>
+            <li><%= link_to "Newest", newest_index_articles_path %></li>
             <% if current_user %>
-              <li><%= link_to "Followed Users", "#" %></li>
+              <li><%= link_to "Followed Users", feed_index_articles_path %></li>
             <% end %>
           </ul>
         </li>
@@ -40,7 +40,7 @@
           <% end %>
         </li>
         <li>
-          <%= link_to "#" do %>
+          <%= link_to users_path do %>
             <span class="glyphicon glyphicon-flash"> </span> Leaderboard
           <% end %>
         </li>
