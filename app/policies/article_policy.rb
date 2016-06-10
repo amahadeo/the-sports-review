@@ -11,6 +11,10 @@ class ArticlePolicy < ApplicationPolicy
     true
   end
   
+  def trend_index?
+    true
+  end
+  
   def show?
     true
   end
@@ -25,5 +29,13 @@ class ArticlePolicy < ApplicationPolicy
   
   def destroy?
     update?
+  end
+  
+  def upvote?
+    user.present?
+  end
+  
+  def downvote?
+    user.present?
   end
 end

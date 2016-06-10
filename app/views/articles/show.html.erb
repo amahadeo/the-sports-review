@@ -10,6 +10,22 @@
     <!--Grouped under one authorization check since update and delete follow same policy-->
   <% end %>
   </div>
+  <p>
+    <% if current_user %>
+      <%= link_to " ", upvote_article_path(@article), class: "glyphicon glyphicon-thumbs-up btn-lg btn-primary", method: :put, remote: true %>
+      <%= link_to " ", downvote_article_path(@article), class: "glyphicon glyphicon-thumbs-down btn-lg btn-info", method: :put, remote: true %> &nbsp;
+      <%= content_tag :span, id: "article-#{@article.id}-vote-count" do %>
+        <%= @article.cached_votes_score %>
+      <% end %>
+    <% else %>
+      <!--This action removes remote: true so that non-logged-in-user may be properly redirected to sign in-->
+      <%= link_to " ", upvote_article_path(@article), class: "glyphicon glyphicon-thumbs-up btn-lg btn-primary", method: :put %>
+      <%= link_to " ", downvote_article_path(@article), class: "glyphicon glyphicon-thumbs-down btn-lg btn-info", method: :put %> &nbsp;
+      <%= content_tag :span, id: "article-#{@article.id}-vote-count" do %>
+        <%= @article.cached_votes_score %>
+      <% end %>
+    <% end %>
+  </p>
 </div>
 
 <div class="row">

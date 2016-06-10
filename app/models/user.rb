@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships
+  acts_as_voter
   
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
@@ -29,4 +30,5 @@ class User < ActiveRecord::Base
     following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
     Article.where("user_id IN (#{following_ids})", user_id: id)
   end
+  
 end
