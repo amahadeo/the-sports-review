@@ -1,9 +1,11 @@
 class ArticlesController < ApplicationController
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy, :feed_index, :upvote, :downvote]
+  
   def index
     if params[:search].present?
       @articles = Article.search(params[:search]).records
     else
-      @articles = Article.all
+      @articles = Article.order("top_rank DESC")
     end
     authorize Article
   end
@@ -18,6 +20,11 @@ class ArticlesController < ApplicationController
     authorize Article
   end
   
+  def trend_index
+    @articles = Article.order("trend_rank DESC")
+    authorize Article
+  end
+  
   def show
     @article = Article.find(params[:id])
     @comments = @article.comments
@@ -25,9 +32,8 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    redirect_to new_user_session_path, alert: "Please log in first." unless current_user
     @article = Article.new
-    # authorize @article
+    authorize @article
   end
   
   def create
@@ -35,6 +41,7 @@ class ArticlesController < ApplicationController
     authorize @article
     
     if @article.save
+      @article.update_ranks
       redirect_to @article, notice: "Thanks for contributing!"
     else
       flash[:error] = "Darn it! Something's wrong with that article, please try again."
@@ -71,9 +78,37 @@ class ArticlesController < ApplicationController
     end
   end 
   
+  def upvote
+    @article = Article.find(params[:id])
+    authorize @article
+    @article.upvote_by current_user
+    @article.update_ranks
+    
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js
+    end
+  end
+  
+  def downvote
+    @article = Article.find(params[:id])
+    authorize @article
+    @article.downvote_by current_user
+    @article.update_ranks
+    
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js
+    end
+  end
+  
   private
   
   def article_params
     params.require(:article).permit(:title, :body)
+  end
+  
+  def logged_in_user
+    redirect_to new_user_session_path, status: :see_other, alert: "Please log in first." unless current_user
   end
 end

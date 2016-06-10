@@ -1,12 +1,28 @@
 <div id="articles" class="transitions-enabled infinite-scroll">
   <% articles.each do |article| %>
     <div class="box panel panel-default">
-      <div class="panel-body">
+      <div class="panel-body article-panel">
         <strong><%= link_to article.title[0, rand(30..50)], article %></strong>
         <p><%= article.body[0, rand(250..500)] %></p>
         <small class="text-muted">
           posted <%= time_ago_in_words(article.created_at) %> ago by <%= link_to article.user.username, article.user %>
         </small>
+        <p>
+          <% if current_user %>
+            <%= link_to " ", upvote_article_path(article), class: "glyphicon glyphicon-thumbs-up", method: :put, remote: true %>
+            <%= link_to " ", downvote_article_path(article), class: "glyphicon glyphicon-thumbs-down", method: :put, remote: true %>
+            <%= content_tag :span, id: "article-#{article.id}-vote-count" do %>
+              <%= article.cached_votes_score %>
+            <% end %>
+          <% else %>
+            <!--This action removes remote: true so that non-logged-in-user may be properly redirected to sign in-->
+            <%= link_to " ", upvote_article_path(article), class: "glyphicon glyphicon-thumbs-up", method: :put %>
+            <%= link_to " ", downvote_article_path(article), class: "glyphicon glyphicon-thumbs-down", method: :put %>
+            <%= content_tag :span, id: "article-#{article.id}-vote-count" do %>
+              <%= article.cached_votes_score %>
+            <% end %>
+          <% end %>
+        </p>
       </div>
     </div>
   <% end %>

@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# Use Acts_As_Votable for voting
+gem 'acts_as_votable', '~> 0.10.0'
 # Use Bonsai elasticsearch for search
 gem 'elasticsearch-rails'
 gem 'elasticsearch-model'
