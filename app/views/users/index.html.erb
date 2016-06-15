@@ -1,2 +1,33 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<h1>Top Users</h1>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Followers</th>
+      <th>Following</th>
+      <th>Articles</th>
+      <th>Comments</th>
+      <th>Votes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @top_users %>
+  </tbody>
+</table>
+
+<h1>Trending Users</h1>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Followers</th>
+      <th>Following</th>
+      <th>Articles</th>
+      <th>Comments</th>
+      <th>Votes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @trending_users %>
+  </tbody>
+</table>

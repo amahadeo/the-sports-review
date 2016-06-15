@@ -3,6 +3,7 @@ class RelationshipsController < ApplicationController
     authorize Relationship
     @user = User.find(params[:user_id])
     current_user.follow(@user)
+    @user.update_ranks
     
     respond_to do |format|
       format.html { redirect_to @user }
@@ -14,6 +15,8 @@ class RelationshipsController < ApplicationController
     authorize Relationship
     @user = User.find(params[:user_id])
     current_user.unfollow(@user)
+    @user.update_ranks
+    
     
     respond_to do |format|
       format.html { redirect_to @user }
