@@ -31,4 +31,17 @@ class User < ActiveRecord::Base
     Article.where("user_id IN (#{following_ids})", user_id: id)
   end
   
+  def update_ranks
+    total_votes_score = articles.sum(:cached_votes_score)
+    
+    recent_votes_score = articles.sum(:trend_rank) # article trend_ranks are also cached recent vote scores
+    recent_followers = passive_relationships.where("created_at >= ?", Time.now - 3.days).count
+    recent_articles = articles.where("created_at >= ?", Time.now - 4.days).count
+    recent_comments = comments.where("created_at >= ?", Time.now - 3.days).count
+    
+    new_top_rank = passive_relationships.count + articles.count + comments.count + total_votes_score
+    new_trend_rank = recent_followers + recent_articles + recent_comments + recent_votes_score
+    
+    update_attributes(top_rank: new_top_rank, trend_rank: new_trend_rank)
+  end
 end

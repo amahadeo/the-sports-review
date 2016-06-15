@@ -42,6 +42,7 @@ class ArticlesController < ApplicationController
     
     if @article.save
       @article.update_ranks
+      current_user.update_ranks
       redirect_to @article, notice: "Thanks for contributing!"
     else
       flash[:error] = "Darn it! Something's wrong with that article, please try again."
@@ -71,6 +72,7 @@ class ArticlesController < ApplicationController
     authorize @article
     
     if @article.destroy
+      current_user.update_ranks
       redirect_to articles_path, notice: "Article deleted."
     else
       flash[:error] = "Sorry, there was an error deleting that article."
@@ -83,6 +85,7 @@ class ArticlesController < ApplicationController
     authorize @article
     @article.upvote_by current_user
     @article.update_ranks
+    @article.user.update_ranks
     
     respond_to do |format|
       format.html { redirect_to :back }
@@ -95,6 +98,7 @@ class ArticlesController < ApplicationController
     authorize @article
     @article.downvote_by current_user
     @article.update_ranks
+    @article.user.update_ranks
     
     respond_to do |format|
       format.html { redirect_to :back }

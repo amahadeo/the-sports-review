@@ -1,0 +1,8 @@
+<tr>
+  <th><%= link_to user.username, user %></th>
+  <th><%= user.passive_relationships.count %></th>
+  <th><%= user.active_relationships.count %></th>
+  <th><%= user.articles.count %></th>
+  <th><%= user.comments.count %></th>
+  <th><%= user.articles.sum(:cached_votes_score) %></th> <!--may create cached user column for this-->
+</tr>

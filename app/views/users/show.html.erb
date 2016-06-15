@@ -24,7 +24,7 @@
     <p><span class="glyphicon glyphicon-user"> </span>&nbsp; Member since: <%= (@user.created_at).to_formatted_s(:long_ordinal) %></p>
     <p><span class="glyphicon glyphicon-list-alt"> </span>&nbsp; <strong><%= @articles.count %></strong> articles contributed</p>
     <p><span class="glyphicon glyphicon-comment"> </span>&nbsp; <strong><%= @comments.count %></strong> comments added</p>
-    <p><span class="glyphicon glyphicon-thumbs-up"> </span>&nbsp; <strong>0</strong> total votes</p>
+    <p><span class="glyphicon glyphicon-thumbs-up"> </span>&nbsp; <strong><%= @votes_score %></strong> total votes score</p>
     <% unless !current_user || current_user == @user %>
       <div id="follow-link">
         <% if current_user.following?(@user) %>

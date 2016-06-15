@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     authorize @comment
     
     if @comment.save
+      current_user.update_ranks
       redirect_to @article, notice: "Thanks for the comment!"
     else
       redirect_to @article, error: "Something's wrong with that comment. Please try again."
@@ -18,6 +19,7 @@ class CommentsController < ApplicationController
     authorize @comment
     
     if @comment.destroy
+      current_user.update_ranks
       redirect_to @article, alert: "Comment was removed."
     else
       redirect_to @article, error: "There was a problem deleting that comment. Please try again"
