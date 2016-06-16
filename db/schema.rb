@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615002818) do
+ActiveRecord::Schema.define(version: 20160616024144) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20160615002818) do
     t.datetime "updated_at",                          null: false
     t.integer  "top_rank",               default: 0
     t.integer  "trend_rank",             default: 0
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
