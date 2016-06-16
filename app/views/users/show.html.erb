@@ -1,7 +1,12 @@
 <div class="row">
   <div class="col-sm-2">
     <div class="thumbnail">
-      <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+      <% if @user.avatar? %>
+        <%= image_tag(@user.avatar.url, class: "img-responsive user-photo") %>
+      <% else %>
+        <%= image_tag("https://ssl.gstatic.com/accounts/ui/avatar_2x.png", class: "img-responsive user-photo") %>
+        <!--<img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">-->
+      <% end %>
     </div>
   </div>
   <div class="col-sm-3">

@@ -2,7 +2,11 @@
   <div data-spy="affix" data-offset-top="250">
   <div class="col-sm-2">
     <div class="thumbnail">
-      <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+      <% if current_user.avatar? %>
+        <%= image_tag(current_user.avatar.url, class: "img-responsive user-photo") %>
+      <% else %>
+        <%= image_tag("https://ssl.gstatic.com/accounts/ui/avatar_2x.png", class: "img-responsive user-photo") %>
+      <% end %>
     </div>
   </div>
   <div class="col-sm-10">

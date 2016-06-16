@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+# Use CarrierWave for avatar uploader
+gem 'carrierwave'
+gem 'fog-aws'
+# Use MiniMagick wrapper for image manipulation
+gem 'mini_magick'
 # Use Acts_As_Votable for voting
 gem 'acts_as_votable', '~> 0.10.0'
 # Use Bonsai elasticsearch for search
