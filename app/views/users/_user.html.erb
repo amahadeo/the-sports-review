@@ -1,5 +1,5 @@
 <tr>
-  <th><%= link_to user.username, user %></th>
+  <th><%= image_tag(user.avatar.tiny.url) %> <%= link_to user.username, user %></th>
   <th><%= user.passive_relationships.count %></th>
   <th><%= user.active_relationships.count %></th>
   <th><%= user.articles.count %></th>
